@@ -18,15 +18,18 @@ class AgendaController extends Controller
        public function salvar(Request $req, $id_veterinario){
            $agenda = new Agenda($req->all());
            $agenda->veterinario_id = $id_veterinario;
-           return $agenda->save();
+           $agenda->save();
+           return $encode = json_encode($agenda);
        }
    
        public function atualizar(Request $req, $id){
            $dados = $req->all();
-           return Agenda::find($id)->update($dados);
+           $agenda = Agenda::find($id)->update($dados);
+           return $encode = json_encode($agenda);
        }
    
        public function deletar($id){
-           return Agenda::find($id)->delete();
+           $agenda = Agenda::find($id)->delete();
+           return $encode = json_encode($agenda);
        }
 }

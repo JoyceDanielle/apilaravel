@@ -20,6 +20,8 @@ class CreateAnimalsTable extends Migration
             $table->string('especie');
             $table->char('sexo', 1);
             $table->string('data_nascimento');
+            $table->string('numero_chip',30)->unique()->nullable();
+            $table->string('doenca',200)->nullable();
 
             $table->unsignedInteger('cliente_id');
             $table->timestamps();

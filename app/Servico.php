@@ -8,7 +8,7 @@ use App\Cliente;
 class Servico extends Model
 {
     protected $fillable = [
-        'laudo', 'tipo', 'preco', 'cliente_id'
+        'laudo', 'tipo', 'tempo','preco', 'cliente_id'
     ];
 
     public function cliente(){
@@ -17,5 +17,9 @@ class Servico extends Model
 
     public function agenda(){
         return $this->belongsTo('Agenda',  'agenda_id');
+    }
+
+    public function validaConsulta(){
+        return $this->belongsTo('ValidaConsulta',  'valida_consulta_id');
     }
 }

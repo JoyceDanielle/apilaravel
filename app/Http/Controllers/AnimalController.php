@@ -20,16 +20,19 @@ class AnimalController extends Controller
 
            $animal = new Animal($req->all());
            $animal->cliente_id = $id_cliente;
-           
-           return $animal->save();
+           $animal->save();
+           return $encode = json_encode($animal);
+
        }
    
        public function atualizar(Request $req, $id){
            $dados = $req->all();
-           return Animal::find($id)->update($dados);
+           $animal = Animal::find($id)->update($dados);
+           return $encode = json_encode($animal);
        }
    
        public function deletar($id){
-           return Animal::find($id)->delete();
+           $animal = Animal::find($id)->delete();
+           return $encode = json_encode($animal);
        } 
 }

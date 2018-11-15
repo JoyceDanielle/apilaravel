@@ -21,7 +21,7 @@ class Cliente extends Model
     
 
     public function animal(){
-        return $this->hasMany('Animal', 'cliente_id', 'id');
+        return $this->hasMany(Animal::class , 'cliente_id', 'id');
     }
 
     public function servico(){

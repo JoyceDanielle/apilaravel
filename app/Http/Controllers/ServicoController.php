@@ -15,19 +15,23 @@ class ServicoController extends Controller
            return Servico::find($id);
        }
    
-       public function salvar(Request $req, $id_cliente, $id_agenda){
+       public function salvar(Request $req, $id_cliente, $id_agenda, $id_valida){
            $servico = new Servico($req->all());
            $servico->cliente_id = $id_cliente;
            $servico->agenda_id = $id_agenda;
-           return $servico->save();
+           $servico->valida_consulta_id = $id_valida;
+           $servico->save();
+           return $encode = json_encode($servico);
        }
    
        public function atualizar(Request $req, $id){
            $dados = $req->all();
-           return Servico::find($id)->update($dados);
+           $servico = Servico::find($id)->update($dados);
+           return $encode = json_encode($servico);
        }
    
        public function deletar($id){
-           return Servico::find($id)->delete();
+           $servico = Servico::find($id)->delete();
+           return $encode = json_encode($servico);
        }
 }

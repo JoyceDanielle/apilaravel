@@ -25,10 +25,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('cliente', 'ClienteController@listar');
 Route::get('cliente/{id}', 'ClienteController@listarId');
+Route::get('cliente/{email}/{senha}', 'ClienteController@logar');
 Route::post('cliente', 'ClienteController@salvar');
 Route::put('cliente/{id}', 'ClienteController@atualizar');
-
 Route::delete('cliente/{id}', 'ClienteController@deletar');
+
+
+Route::get('cliente-possui-animal/{id}', 'ClienteController@listarComAnimal');
 
 /**
  * rotas animal
@@ -57,6 +60,7 @@ Route::get('clinica/{id}', 'ClinicaController@vet');
 
 Route::get('clinica', 'ClinicaController@listar');
 Route::get('clinica/{id}', 'ClinicaController@listarId');
+Route::get('clinica/{email}/{senha}', 'ClinicaController@logar');
 Route::post('clinica', 'ClinicaController@salvar');
 Route::put('clinica/{id}', 'ClinicaController@atualizar');
 Route::delete('clinica/{id}', 'ClinicaController@deletar');
@@ -67,6 +71,7 @@ Route::delete('clinica/{id}', 'ClinicaController@deletar');
 
 Route::get('veterinario', 'VeterinarioController@listar');
 Route::get('veterinario/{id}', 'VeterinarioController@listarId');
+Route::get('veterinario/{email}/{senha}', 'VeterinarioController@logar');
 Route::post('veterinario/{id_clinica}', 'VeterinarioController@salvar');
 Route::put('veterinario/{id}', 'VeterinarioController@atualizar');
 Route::delete('veterinario{id}', 'VeterinarioController@deletar');
@@ -77,7 +82,7 @@ Route::delete('veterinario{id}', 'VeterinarioController@deletar');
 
 Route::get('servico', 'ServicoController@listar');
 Route::get('servico/{id}', 'ServicoController@listarId');
-Route::post('servico/{id_cliente}/{id_agenda}', 'ServicoController@salvar');
+Route::post('servico/{id_cliente}/{id_agenda}/{id_valida}', 'ServicoController@salvar');
 Route::put('servico/{id}', 'ServicoController@atualizar');
 Route::delete('servico/{id}', 'ServicoController@deletar');
 
@@ -86,3 +91,11 @@ Route::delete('servico/{id}', 'ServicoController@deletar');
  */
 
 Route::get('atendimento', 'VeterinarioServicoAnimalControllerS@listar');
+
+/**
+ * rotas valida consulta
+ */
+
+ Route::post('valida/{id_veterinario}', 'ValidaConsultaController@salvar');
+
+ 

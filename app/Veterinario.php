@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Clinica;
 use App\Agenda;
+use App\validaConsulta;
 
 class Veterinario extends Model
 {
@@ -21,6 +22,10 @@ class Veterinario extends Model
 
     public function agenda(){
         return $this->hasOne('Agenda', 'veterinario_id', 'id');
+    }
+
+    public function validaConsulta(){
+        return $this->hasOne('ValidaConsulta', 'veterinario_id', 'id');
     }
 
 }

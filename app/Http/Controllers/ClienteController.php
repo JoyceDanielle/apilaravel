@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use \App\Cliente;
+use DB;
 
 class ClienteController extends Controller
 {
@@ -13,9 +14,16 @@ class ClienteController extends Controller
      return Cliente::all();
     }
 
+  
     public function listarId($id){
         return Cliente::find($id);
     }
+
+    public function listarComAnimal($id){
+        $cliente = Cliente::find($id);
+        return $animais = $cliente->animal()->get();
+    }
+    
 
     public function salvar(Request $req){
         $dados = $req->all();
@@ -25,7 +33,7 @@ class ClienteController extends Controller
     public function atualizar(Request $req, $id){
         $dados = $req->all();
         $cliente = Cliente::find($id)->update($dados);
-        return $cliente;
+        return $encode = json_encode($cliente);
     }
 
     //teste
@@ -37,11 +45,15 @@ class ClienteController extends Controller
 
     public function deletar($id){
         $cliente =Cliente::find($id)->delete();
-        return $cliente;
+        return $encode = json_encode($cliente);
     }
 
     //teste
-    public function logar($email, $senha): boolean{
-        Cliente::find($email, $senha);
+    public function logar($login, $senha){
+
+        $cliente = DB::select(' select * from clientes where login = ? AND senha = ? ', [$login, $senha]);  
+        $cliente_obj = $cliente[0];
+        return $encode = json_encode($cliente_obj);
     }
+
 }

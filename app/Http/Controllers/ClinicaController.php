@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Clinica;
+use DB;
 
 class ClinicaController extends Controller
 {
@@ -22,19 +23,28 @@ class ClinicaController extends Controller
    
        public function salvar(Request $req){
            $dados = $req->all();
-           return Clinica::create($dados);
+           $clinica = Clinica::create($dados);
+           return $encode = json_encode($clinica);
+
        }
    
        public function atualizar(Request $req, $id){
            $dados = $req->all();
            $clinica = Clinica::find($id)->update($dados);
-           return 200;
+           return $encode = json_encode($clinica);
        }
    
        public function deletar($id){
            $clinica = Clinica::find($id)->delete();
-           return 204;
+           return $encode = json_encode($clinica);
        }
+
+       public function logar($login, $senha){
+
+        $clinica = DB::select(' select * from clinicas where login = ? AND senha = ? ', [$login, $senha]);  
+        $clinica_obj = $clinica[0];
+        return $encode = json_encode($clinica_obj);
+    }
 
 
 }
